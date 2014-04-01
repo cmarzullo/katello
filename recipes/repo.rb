@@ -31,5 +31,23 @@ end
 
 if platform_family?('rhel')
   include_recipe 'yum-epel'
-  # enable candlepin repos
+
+  if platform?('centos')
+
+    # Add the things normally found at http://repos.fedorapeople.org/repos/candlepin/subscription-manager/epel-subscription-manager.repo
+    yum_repository 'epel-subscription-manager' do
+      description 'Tools and libraries for Red Hat subscription management.'
+      baseurl 'http://repos.fedorapeople.org/repos/candlepin/subscription-manager/epel-$releasever/$basearch/'
+      gpgcheck false
+      action :create
+    end
+
+    yum_repository 'epel-subscription-manager-source' do
+      description 'Tools and libraries for Red Hat subscription management. - Source'
+      baseurl 'http://repos.fedorapeople.org/repos/candlepin/subscription-manager/epel-$releasever/SRPMS'
+      gpgcheck false
+      enabled false
+      action :create
+    end
+  end
 end

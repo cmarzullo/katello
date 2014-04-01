@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: katello
-# Attributes:: repo
+# Attributes:: default
 #
 # Copyright (C) 2014 Chef Software, Inc.
 #
@@ -17,12 +17,4 @@
 # limitations under the License.
 #
 
-case node['platform_family']
-when 'fedora'
-  case node['platform_version'].to_i
-  when 19
-    default['katello']['repo']['url'] = 'http://fedorapeople.org/groups/katello/releases/yum/1.4/Fedora/19/x86_64/katello-repos-1.4.4-1.fc19.noarch.rpm'
-  end
-when 'rhel'
-  default['katello']['repo']['url'] = 'http://fedorapeople.org/groups/katello/releases/yum/1.4/RHEL/6Server/x86_64/katello-repos-1.4.4-1.el6.noarch.rpm'
-end
+default['katello']['enable_foreman'] = false

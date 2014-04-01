@@ -16,3 +16,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+include_recipe "#{cookbook_name}::repo"
+include_recipe 'java'
+
+if node['katello']['enable_foreman']
+  pkg_name = 'katello-foreman-all'
+
+  if platform?('fedora')
+    include_recipe 'selinux::disabled' # That's what they say
+  end
+
+else
+  pkg_name = 'katello-all'
+end
+
+package pkg_name do
+  action :install
+end

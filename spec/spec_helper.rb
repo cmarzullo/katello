@@ -7,6 +7,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
   config.color_enabled = true
+  config.formatter = :documentation
 end
 
 at_exit { ChefSpec::Coverage.report! }
