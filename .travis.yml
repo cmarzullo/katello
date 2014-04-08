@@ -47,4 +47,4 @@ env:
   - KITCHEN_INSTANCE='server-centos-65'
   - KITCHEN_INSTANCE='server-fedora-19'
   - KITCHEN_INSTANCE='server-with-foreman-centos-65'
-  - KITCHEN-INSTANCE='server-with-foreman-fedora-19'
+  - KITCHEN_INSTANCE='server-with-foreman-fedora-19'
