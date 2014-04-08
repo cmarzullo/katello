@@ -19,6 +19,5 @@
 
 default['katello']['enable_foreman'] = false
 default['katello']['admin_password'] = nil
-if node['platform'] == 'fedora'
-  default['java']['jdk_version'] = '7'
-end
+
+default['java']['jdk_version'] = '7' if node['platform'] == 'fedora'
