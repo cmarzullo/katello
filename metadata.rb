@@ -10,6 +10,6 @@ version          '0.1.0'
   supports p
 end
 
-%w(java selinux yum yum-epel).each do |d|
+%w(java openssl selinux yum yum-epel).each do |d|
   depends d
 end
