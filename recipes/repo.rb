@@ -48,6 +48,7 @@ if platform_family?('rhel')
       gpgcheck false
       enabled false
       action :create
+      ignore_failure true # This dir may be empty, so who cares if it is
     end
   end
 end
