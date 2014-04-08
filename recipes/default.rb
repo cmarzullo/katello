@@ -50,7 +50,7 @@ cookbook_file '/usr/share/katello/install/puppet/modules/postgres/manifests/conf
 end
 
 execute 'katello-configure' do
-  command "/usr/sbin/katello-configure --user-pass=#{node['katello']['admin_password']}"
+  command "/usr/sbin/katello-configure -b --user-pass=#{node['katello']['admin_password']}"
   creates '/etc/katello/katello-configure.conf'
   action :run
 end
