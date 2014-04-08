@@ -18,3 +18,6 @@
 #
 
 default['katello']['enable_foreman'] = false
+if node['platform'] == 'fedora'
+  default['java']['jdk_version'] = '7'
+end
