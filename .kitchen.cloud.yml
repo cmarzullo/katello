@@ -33,12 +33,18 @@ platforms:
 suites:
 - name: server
   run_list:
+  - recipe[fqdn]
   - recipe[katello]
-  attributes: {}
+  attributes:
+    machine_fqdn: katello.example.com
+    fqdn_as_hostname: true
 
 - name: server-with-foreman
   run_list:
+  - recipe[fqdn]
   - recipe[katello]
   attributes:
     katello:
       enable_foreman: true
+    machine_fqdn: katello.example.com
+    fqdn_as_hostname: true
