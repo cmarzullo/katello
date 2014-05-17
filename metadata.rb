@@ -10,6 +10,9 @@ version          '0.1.0'
   supports p
 end
 
-%w(java openssl selinux yum yum-epel).each do |d|
+%w(java openssl yum yum-epel).each do |d|
   depends d
 end
+
+# 0.8.x broke support for Fedora
+depends 'selinux', '~> 0.7'
