@@ -15,4 +15,4 @@ end
 end
 
 # 0.8.x broke support for Fedora
-depends 'selinux', '~> 0.7'
+depends 'selinux', '< 0.8.0'
