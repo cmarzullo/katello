@@ -17,12 +17,19 @@
 # limitations under the License.
 #
 
-case node['platform_family']
-when 'fedora'
-  case node['platform_version'].to_i
-  when 19
-    default['katello']['repo']['url'] = 'http://fedorapeople.org/groups/katello/releases/yum/1.4/Fedora/19/x86_64/katello-repos-1.4.4-1.fc19.noarch.rpm'
-  end
-when 'rhel'
-  default['katello']['repo']['url'] = 'http://fedorapeople.org/groups/katello/releases/yum/1.4/RHEL/6Server/x86_64/katello-repos-1.4.4-1.el6.noarch.rpm'
-end
+default[:katello][:repo][:managed] = true
+
+#case node['platform_family']
+#when 'fedora'
+#  case node['platform_version'].to_i
+#  when 19
+#    default['katello']['repo']['url'] = 'http://fedorapeople.org/groups/katello/releases/yum/1.4/Fedora/19/x86_64/katello-repos-latest.rpm'
+#  end
+#when 'rhel'
+#  default['katello']['repo']['url'] = 'https://fedorapeople.org/groups/katello/releases/yum/2.0/katello/RHEL/6/x86_64/katello-repos-latest.rpm'
+#  default['katello']['foremanrepo']['url'] = 'http://yum.theforeman.org/releases/1.6/el6/x86_64/foreman-release.rpm'
+#  default['katello']['puppetrepo']['url'] = 'http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm'
+#end
+
+default['katello']['repo']['sub_manager_source'] = false
+

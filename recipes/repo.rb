@@ -17,38 +17,19 @@
 # limitations under the License.
 #
 
-repo_file = "#{Chef::Config[:file_cache_path]}/#{File.basename(node['katello']['repo']['url'])}"
-
-remote_file repo_file do
-  source node['katello']['repo']['url']
-  action :create
-end
-
-yum_package 'katello-repos' do
-  source repo_file
-  action :install
-end
-
 if platform_family?('rhel')
+  ### EPEL
   include_recipe 'yum-epel'
 
-  if platform?('centos')
-
-    # Add the things normally found at http://repos.fedorapeople.org/repos/candlepin/subscription-manager/epel-subscription-manager.repo
-    yum_repository 'epel-subscription-manager' do
-      description 'Tools and libraries for Red Hat subscription management.'
-      baseurl 'http://repos.fedorapeople.org/repos/candlepin/subscription-manager/epel-$releasever/$basearch/'
-      gpgcheck false
-      action :create
-    end
-
-    yum_repository 'epel-subscription-manager-source' do
-      description 'Tools and libraries for Red Hat subscription management. - Source'
-      baseurl 'http://repos.fedorapeople.org/repos/candlepin/subscription-manager/epel-$releasever/SRPMS'
-      gpgcheck false
-      enabled false
-      action :create
-      ignore_failure true # This dir may be empty, so who cares if it is
+  node[:katello][:repolist].each do |repo|
+    yum_repository repo do
+      baseurl node[:yum][repo][:baseurl]
+      description node[:yum][repo][:description]
+      gpgkey node[:yum][repo][:gpgkey]
+      gpgcheck node[:yum][repo][:gpgcheck]
     end
   end
+else
+  log "NO REPOS CONFIGURED"
 end
+

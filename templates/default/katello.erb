@@ -1,0 +1,14 @@
+
+# Ports needed for Katello
+# 80 TCP - HTTP, used for provisioning purposes
+-A FWR -p tcp -m tcp --dport 80 -j ACCEPT
+
+# 443 TCP - HTTPS, used for web access and api communication
+-A FWR -p tcp -m tcp --dport 443 -j ACCEPT
+
+# 5671 TCP - qpid ssl - used for client actions
+-A FWR -p tcp -m tcp --dport 5671 -j ACCEPT
+
+# 9090 TCP - HTTPS - used for communication with the smart proxy
+-A FWR -p tcp -m tcp --dport 9090 -j ACCEPT
+
